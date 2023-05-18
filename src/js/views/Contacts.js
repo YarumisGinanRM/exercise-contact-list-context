@@ -6,10 +6,6 @@ import { ContactCard } from "../component/ContactCard.js";
 import { Modal } from "../component/Modal";
 
 export const Contacts = () => {
-	const [state, setState] = useState({
-		showModal: false
-	});
-
 	const { store } = useContext(Context);
 
 	return (
@@ -23,14 +19,7 @@ export const Contacts = () => {
 				<div id="contacts" className="panel-collapse collapse show" aria-expanded="true">
 					<ul className="list-group pull-down" id="contact-list">
 						{store.contactos.map((item, index) => (
-							<div key={index}>
-								<ContactCard item={item} onDelete={() => setState({ showModal: false })} />
-								<Modal
-									show={state.showModal}
-									onClose={() => setState({ showModal: true })}
-									item={item}
-								/>
-							</div>
+							<ContactCard item={item} key={index} />
 						))}
 					</ul>
 				</div>
