@@ -42,6 +42,7 @@ const getState = ({ getStore, setStore }) => {
 			},
 
 			removeContact: contactodelete => {
+				console.log(contactodelete);
 				const store = getStore();
 				setStore({
 					contactos: store.contactos.filter(contacto => contacto.id != contactodelete.id)

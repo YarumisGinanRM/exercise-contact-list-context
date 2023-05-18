@@ -17,17 +17,17 @@ export const Contacts = () => {
 			<div>
 				<p className="text-right my-3">
 					<Link className="btn btn-success" to="/add">
-						Add new contact
+						agregar nuevo contacto
 					</Link>
 				</p>
 				<div id="contacts" className="panel-collapse collapse show" aria-expanded="true">
 					<ul className="list-group pull-down" id="contact-list">
 						{store.contactos.map((item, index) => (
 							<div key={index}>
-								<ContactCard item={item} onDelete={() => setState({ showModal: true })} />
+								<ContactCard item={item} onDelete={() => setState({ showModal: false })} />
 								<Modal
 									show={state.showModal}
-									onClose={() => setState({ showModal: false })}
+									onClose={() => setState({ showModal: true })}
 									item={item}
 								/>
 							</div>
