@@ -48,7 +48,7 @@ export const ContactCard = props => {
 				</div>
 			</div>
 			<Modal show={showModal} onClose={() => setShowModal(false)} item={props.item} />
-			<EditModal show={editModal} onClose={() => setEditModal(false)} />
+			<EditModal show={editModal} onClose={() => setEditModal(false)} item={props.item} />
 		</li>
 	);
 };

@@ -4,21 +4,21 @@ const getState = ({ getStore, setStore }) => {
 			//Your data structures, A.K.A Entities
 			contactos: [
 				{
-					id: 0,
+					id: 1,
 					name: "Yarumis Rodriguez",
 					email: "ym@gmail.com",
 					phone: "+58 1234567",
 					address: "Caracas"
 				},
 				{
-					id: 1,
+					id: 2,
 					name: "Pedro Perez",
 					email: "pedroperez@gmail.com",
 					phone: "+58 7654321",
 					address: "Zulia"
 				},
 				{
-					id: 2,
+					id: 3,
 					name: "Maria Gonzalez",
 					email: "mg@gmail.com",
 					phone: "+58 3219870",
@@ -26,7 +26,7 @@ const getState = ({ getStore, setStore }) => {
 				}
 			],
 
-			contId: 2
+			contId: 3
 		},
 		actions: {
 			//(Arrow) Functions that update the Store
@@ -38,6 +38,7 @@ const getState = ({ getStore, setStore }) => {
 				setStore({
 					contactos: [...auxStore.contactos, newItem]
 				});
+				// console.log(newItem);
 				alert("Contacto agregado!");
 			},
 
@@ -51,6 +52,15 @@ const getState = ({ getStore, setStore }) => {
 
 			editContact: contactoEditado => {
 				console.log(contactoEditado);
+				const store = getStore();
+				const nuevosContactos = store.contactos.map(contacto => {
+					if (contacto.id == contactoEditado.id) {
+						return contactoEditado;
+					} else return contacto;
+				});
+				setStore({
+					contactos: nuevosContactos
+				});
 			}
 		}
 	};
