@@ -24,14 +24,15 @@ const getState = ({ getStore, setStore }) => {
 		actions: {
 			//(Arrow) Functions that update the Store
 			// Remember to use the scope: scope.state.store & scope.setState()
-			// loadProducts: async () => {
-			// 	try {
-			// 		let resp = await fetch("https://assets.breatheco.de/apis/fake/contacto");
-			// 		let data = await resp.json();
-			// 		setStore({ contactos: data.map(contacto => {...contacto})});
-			// 	} catch (err) {
-			// 		console.log(err);
-			// 	}
+			getContacts: async () => {
+				try {
+					let resp = await fetch("https://assets.breatheco.de/apis/fake/contact/agenda/proyecto_de_yarumis");
+					let data = await resp.json();
+					setStore({ contactos: data });
+				} catch (err) {
+					console.log(err);
+				}
+			},
 
 			newContact: async newItem => {
 				const auxStore = getStore();

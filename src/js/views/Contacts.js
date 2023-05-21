@@ -6,7 +6,11 @@ import { ContactCard } from "../component/ContactCard.js";
 import { Modal } from "../component/Modal";
 
 export const Contacts = () => {
-	const { store } = useContext(Context);
+	const { store, actions } = useContext(Context);
+
+	useEffect(() => {
+		actions.getContacts();
+	}, []);
 
 	return (
 		<div className="container">
