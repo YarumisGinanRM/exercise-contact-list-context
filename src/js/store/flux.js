@@ -4,13 +4,6 @@ const getState = ({ getStore, setStore }) => {
 			//Your data structures, A.K.A Entities
 			contactos: [
 				{
-					id: 1,
-					name: "Yarumis Rodriguez",
-					email: "ym@gmail.com",
-					phone: "+58 1234567",
-					address: "Caracas"
-				},
-				{
 					id: 2,
 					name: "Pedro Perez",
 					email: "pedroperez@gmail.com",
@@ -31,15 +24,36 @@ const getState = ({ getStore, setStore }) => {
 		actions: {
 			//(Arrow) Functions that update the Store
 			// Remember to use the scope: scope.state.store & scope.setState()
+			loadProducts: async () => {
+				try {
+					let resp = await fetch("https://assets.breatheco.de/apis/fake/contactos");
+					let data = await resp.json();
+					setStore({ contactos: data.map(contactos => {...contacto})});
+				} catch (err) {
+					console.log(err);
+				}
+
 			newContact: newItem => {
-				const auxStore = getStore();
-				setStore({ contId: auxStore.contId + 1 });
-				newItem.id = auxStore.contId;
-				setStore({
-					contactos: [...auxStore.contactos, newItem]
-				});
-				// console.log(newItem);
-				alert("Contacto agregado!");
+					const auxStore = getStore();
+					// setStore({ contId: auxStore.contId + 1 });
+					// newItem.id = auxStore.contId;
+					try {
+						let resp = await fetch("https://assets.breatheco.de/apis/fake/contactos", {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json"
+							},
+							body: JSON.stringify({ ...newItem, agenda_slug: "Proyecto" })
+						});
+						let data = await resp.json();
+					setStore({
+						contactos: [...auxStore.contactos {...data}]
+					});
+					alert("Contacto agregado!");
+					} catch (err) {
+						// eslint-disable-next-line no-console
+						console.log(err);
+					}
 			},
 
 			removeContact: contactodelete => {
