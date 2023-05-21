@@ -1,22 +1,22 @@
-const getState = ({ getStore, setStore }) => {
+const getState = ({ getStore, setStore, getActions }) => {
 	return {
 		store: {
 			//Your data structures, A.K.A Entities
 			contactos: [
-				{
-					id: 1,
-					full_name: "Pedro Perez",
-					email: "pedroperez@gmail.com",
-					phone: "+58 7654321",
-					address: "Zulia"
-				},
-				{
-					id: 2,
-					full_name: "Maria Gonzalez",
-					email: "mg@gmail.com",
-					phone: "+58 3219870",
-					address: "Merida"
-				}
+				// {
+				// 	id: 1,
+				// 	full_name: "Pedro Perez",
+				// 	email: "pedroperez@gmail.com",
+				// 	phone: "+58 7654321",
+				// 	address: "Zulia"
+				// },
+				// {
+				// 	id: 2,
+				// 	full_name: "Maria Gonzalez",
+				// 	email: "mg@gmail.com",
+				// 	phone: "+58 3219870",
+				// 	address: "Merida"
+				// }
 			],
 
 			contId: 2
@@ -56,12 +56,23 @@ const getState = ({ getStore, setStore }) => {
 				}
 			},
 
-			removeContact: contactodelete => {
-				console.log(contactodelete);
+			removeContact: async contactodelete => {
 				const store = getStore();
-				setStore({
-					contactos: store.contactos.filter(contacto => contacto.id != contactodelete.id)
-				});
+				try {
+					let resp = await fetch("https://assets.breatheco.de/apis/fake/contact/" + contactodelete.id, {
+						method: "DELETE",
+						headers: {
+							"Content-Type": "application/json"
+						}
+					});
+				} catch (err) {
+					console.log(err);
+				}
+
+				getActions().getContacts();
+				// setStore({
+				// 	contactos: store.contactos.filter(contacto => contacto.id != contactodelete.id)
+				// });
 			},
 
 			editContact: contactoEditado => {
