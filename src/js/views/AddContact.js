@@ -6,7 +6,7 @@ export const AddContact = () => {
 	const { actions } = useContext(Context);
 
 	const [contact, setContact] = useState({
-		name: "",
+		full_name: "",
 		email: "",
 		phone: "",
 		address: ""
@@ -21,8 +21,8 @@ export const AddContact = () => {
 						<label>Full Name</label>
 						<input
 							type="text"
-							onChange={event => setContact({ ...contact, name: event.target.value })}
-							value={contact.name || ""}
+							onChange={event => setContact({ ...contact, full_name: event.target.value })}
+							value={contact.full_name || ""}
 							className="form-control"
 							placeholder="Full Name"
 						/>
