@@ -7,7 +7,7 @@ export const EditModal = props => {
 	const { actions } = useContext(Context);
 	const [contact, setContact] = useState({
 		id: props.item.id,
-		name: props.item.name,
+		full_name: props.item.full_name,
 		email: props.item.email,
 		phone: props.item.phone,
 		address: props.item.address
@@ -36,10 +36,10 @@ export const EditModal = props => {
 						<input
 							type="text"
 							onChange={event => handleInputs(event)}
-							value={contact.name || ""}
+							value={contact.full_name || ""}
 							className="form-control"
 							placeholder="Full Name"
-							name="name"
+							name="full_name"
 						/>
 						<label>Email</label>
 						<input
@@ -81,7 +81,7 @@ export const EditModal = props => {
 							type="button"
 							className="btn btn-primary"
 							onClick={() => {
-								if (contact.name != " ") actions.editContact(contact);
+								if (contact.full_name != " ") actions.editContact(contact);
 								props.onClose();
 							}}>
 							Save changes

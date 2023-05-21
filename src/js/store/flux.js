@@ -75,17 +75,30 @@ const getState = ({ getStore, setStore, getActions }) => {
 				// });
 			},
 
-			editContact: contactoEditado => {
-				console.log(contactoEditado);
+			editContact: async contactoEditado => {
 				const store = getStore();
-				const nuevosContactos = store.contactos.map(contacto => {
-					if (contacto.id == contactoEditado.id) {
-						return contactoEditado;
-					} else return contacto;
-				});
-				setStore({
-					contactos: nuevosContactos
-				});
+				try {
+					let resp = await fetch("https://assets.breatheco.de/apis/fake/contact/" + contactoEditado.id, {
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({ ...contactoEditado, agenda_slug: "proyecto_de_yarumis" })
+					});
+					if (resp.status == 200) {
+						getActions().getContacts();
+					} else alert("No se ha podido editar el contacto!");
+				} catch (error) {
+					console.log(err);
+				}
+				// const nuevosContactos = store.contactos.map(contacto => {
+				// 	if (contacto.id == contactoEditado.id) {
+				// 		return contactoEditado;
+				// 	} else return contacto;
+				// });
+				// setStore({
+				// 	contactos: nuevosContactos
+				// });
 			}
 		}
 	};
